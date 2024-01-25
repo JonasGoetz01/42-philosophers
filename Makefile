@@ -2,9 +2,11 @@ NAME = philos
 
 SRC_DIR = ./philo/
 
-SRC = $(SRC_DIR)error.c \
-	  $(SRC_DIR)ft_atoi.c \
-	  $(SRC_DIR)philosophers.c
+SRC = $(SRC_DIR)main.c \
+	  $(SRC_DIR)init.c \
+	  $(SRC_DIR)threads.c \
+	  $(SRC_DIR)utils.c \
+	  $(SRC_DIR)actions.c
 
 OBJ = $(SRC:.c=.o)
 
