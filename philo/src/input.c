@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 18:56:27 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/07 19:55:03 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/07 20:21:26 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	input_check(int argc, char **argv)
 	int	j;
 
 	i = 1;
+	if (argc < 5 || argc > 6)
+		return (1);
 	while (argv[i])
 	{
 		j = 0;

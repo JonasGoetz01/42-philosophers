@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:45:08 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/07 20:12:25 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/07 21:16:22 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 int	philo_runtime(t_philosopher *p)
 {
+	if (p->data->num_philos == 1)
+	{
+		pthread_mutex_lock(p->fork_left);
+		ft_log(*(p->data->log), p->data->timestamp_init, p->id, FORK);
+		sleep_ms(p->data->time_to_die);
+	}
 	if (!p)
 		return (1);
 	if (p->id == 0)
