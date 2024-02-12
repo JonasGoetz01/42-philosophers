@@ -1,5 +1,2 @@
-*/**/*.o
-*/**/*.a
-*/**/*.out
-philo
 .vscode/
+.gitignore
