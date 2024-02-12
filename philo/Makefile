@@ -1,4 +1,4 @@
-NAME = philos
+NAME = philo
 
 SRC := src
 
