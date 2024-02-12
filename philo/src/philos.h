@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philos.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 20:14:41 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/07 20:14:42 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/12 14:23:21 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
+# include <limits.h>
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -85,7 +86,7 @@ void				ft_log(pthread_mutex_t mutex, long timestamp_init, int id,
 void				log_death(t_philosopher **philosophers);
 
 // Time
-long				get_current_time_ms(void);
+long				get_ms(void);
 void				sleep_ms(int ms);
 
 // Runtime

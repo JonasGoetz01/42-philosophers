@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   philos.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:45:13 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/07 20:25:30 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/12 14:32:02 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philos.h"
 
 int	main(int argc, char **argv)
 {
@@ -33,8 +33,6 @@ int	main(int argc, char **argv)
 	while (pthread_mutex_lock(&(vars.died)))
 		printf("");
 	threads_detach(vars.threads, &data);
-	sleep_ms(2);
-	i = 0;
 	log_death(philosophers);
 	return (0);
 }

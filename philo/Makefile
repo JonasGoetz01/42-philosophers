@@ -6,15 +6,13 @@ WFLAGS := -Wall -Werror -Wextra
 
 # SRC
 SRCCFILES := input.c \
-			 mutex_utils.c \
 			 log.c \
 			 utils.c \
 			 philo_create.c \
 			 philo_runtime.c \
-			 philo_init.c \
 			 time.c \
 			 philo_checker.c \
-			 philo.c
+			 philos.c
 
 SRCCFILES := $(addprefix $(SRC)/, $(SRCCFILES))
 

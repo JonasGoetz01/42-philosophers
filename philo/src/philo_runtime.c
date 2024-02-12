@@ -6,11 +6,11 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:45:08 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/07 21:16:22 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/12 14:32:02 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philos.h"
 
 int	philo_runtime(t_philosopher *p)
 {
@@ -23,8 +23,8 @@ int	philo_runtime(t_philosopher *p)
 	if (!p)
 		return (1);
 	if (p->id == 0)
-		p->data->timestamp_init = get_current_time_ms();
-	p->last_time_eaten = get_current_time_ms();
+		p->data->timestamp_init = get_ms();
+	p->last_time_eaten = get_ms();
 	if (p->id % 2 == 1)
 		sleep_ms(5);
 	while (has_eaten_enough(p) == 0)
@@ -37,16 +37,6 @@ int	philo_runtime(t_philosopher *p)
 	return (0);
 }
 
-int	has_eaten_enough(t_philosopher *p)
-{
-	int	times_must_eat;
-
-	times_must_eat = p->data->num_must_eat;
-	if (times_must_eat == -1 || times_must_eat > p->times_eaten)
-		return (0);
-	return (1);
-}
-
 void	ft_eat(t_philosopher *p)
 {
 	pthread_mutex_lock(p->fork_left);
@@ -57,7 +47,7 @@ void	ft_eat(t_philosopher *p)
 	sleep_ms(p->data->time_to_eat);
 	pthread_mutex_unlock(p->fork_left);
 	pthread_mutex_unlock(p->fork_right);
-	p->last_time_eaten = get_current_time_ms();
+	p->last_time_eaten = get_ms();
 	p->times_eaten++;
 }
 

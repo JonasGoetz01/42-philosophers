@@ -6,11 +6,11 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:44:54 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/07 20:00:14 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/12 14:32:02 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philos.h"
 
 t_philosopher	**philo_create(t_data *data, pthread_mutex_t *forks)
 {
@@ -36,4 +36,28 @@ t_philosopher	**philo_create(t_data *data, pthread_mutex_t *forks)
 		i++;
 	}
 	return (philosophers);
+}
+
+void	philo_init(t_philosopher **philosophers, pthread_t *threads)
+{
+	int	i;
+
+	i = 0;
+	while (philosophers[i])
+	{
+		pthread_create(&threads[i], NULL, (void *)philo_runtime,
+			philosophers[i]);
+		i++;
+	}
+	pthread_create(&threads[250], NULL, (void *)philo_checker, philosophers);
+}
+
+void	threads_detach(pthread_t *threads, t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->num_philos)
+		pthread_detach(threads[i++]);
+	pthread_detach(threads[250]);
 }

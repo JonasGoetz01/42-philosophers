@@ -6,13 +6,13 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:45:21 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/07 19:45:21 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/12 14:32:02 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philos.h"
 
-long	get_current_time_ms(void)
+long	get_ms(void)
 {
 	struct timeval	current_time;
 
@@ -24,7 +24,7 @@ void	sleep_ms(int ms)
 {
 	long	start;
 
-	start = get_current_time_ms();
-	while (get_current_time_ms() - start < ms)
+	start = get_ms();
+	while (get_ms() - start < ms)
 		usleep(500);
 }

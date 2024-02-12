@@ -6,11 +6,11 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 18:03:33 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/07 19:54:00 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/12 14:32:02 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philos.h"
 
 void	philo_checker(t_philosopher **philos)
 {
@@ -27,10 +27,10 @@ void	philo_checker(t_philosopher **philos)
 
 void	check_if_dead_checker(t_philosopher **philos, t_philosopher *p)
 {
-	if (get_current_time_ms() - p->last_time_eaten > p->data->time_to_die)
+	if (get_ms() - p->last_time_eaten > p->data->time_to_die)
 	{
 		if (check_if_everyone_has_eaten(philos) == 0)
-			p->dead = get_current_time_ms() - p->data->timestamp_init;
+			p->dead = get_ms() - p->data->timestamp_init;
 		pthread_mutex_init(p->data->died, NULL);
 	}
 }
@@ -50,5 +50,15 @@ int	check_if_everyone_has_eaten(t_philosopher **philosophers)
 		i++;
 	}
 	pthread_mutex_init(philosophers[0]->data->died, NULL);
+	return (1);
+}
+
+int	has_eaten_enough(t_philosopher *p)
+{
+	int	times_must_eat;
+
+	times_must_eat = p->data->num_must_eat;
+	if (times_must_eat == -1 || times_must_eat > p->times_eaten)
+		return (0);
 	return (1);
 }

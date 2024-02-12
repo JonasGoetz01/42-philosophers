@@ -6,9 +6,11 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:45:26 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/07 19:45:26 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/12 14:32:02 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "philos.h"
 
 int	is_space(char c)
 {
@@ -18,7 +20,7 @@ int	is_space(char c)
 
 int	ft_isdigit(int c)
 {
-	if (c >= 48 && c <= 57)
+	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
 }
@@ -65,4 +67,13 @@ long	ft_atoi_l(const char *str)
 	else if (ret < -2147483648)
 		return (0);
 	return (ret);
+}
+
+void	mutex_init(pthread_mutex_t *mutex, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < n)
+		pthread_mutex_init(&mutex[i], NULL);
 }
