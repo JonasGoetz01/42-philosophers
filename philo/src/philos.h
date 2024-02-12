@@ -96,9 +96,9 @@ void				ft_sleep(t_philosopher *p);
 int					has_eaten_enough(t_philosopher *p);
 
 // checker
-void				check_if_dead_checker(t_philosopher **philos,
+void				dead_checker(t_philosopher **philos,
 						t_philosopher *p);
-int					check_if_everyone_has_eaten(t_philosopher **philosophers);
+int					check_all_eaten(t_philosopher **philosophers);
 
 // log
 void				log_death(t_philosopher **philosophers);
@@ -107,4 +107,6 @@ int					ft_strlen(char *str);
 int					input_check(int argc, char **argv);
 
 int					input_parse(t_data *data, int argc, char **argv);
+
+int					ft_isdigit(int c);
 #endif

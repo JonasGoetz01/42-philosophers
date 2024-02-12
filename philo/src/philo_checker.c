@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 18:03:33 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/12 14:32:02 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/12 17:11:34 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,22 @@ void	philo_checker(t_philosopher **philos)
 	{
 		i = 0;
 		while (philos[i])
-			check_if_dead_checker(philos, philos[i++]);
-		check_if_everyone_has_eaten(philos);
+			dead_checker(philos, philos[i++]);
+		check_all_eaten(philos);
 	}
 }
 
-void	check_if_dead_checker(t_philosopher **philos, t_philosopher *p)
+void	dead_checker(t_philosopher **philos, t_philosopher *p)
 {
 	if (get_ms() - p->last_time_eaten > p->data->time_to_die)
 	{
-		if (check_if_everyone_has_eaten(philos) == 0)
+		if (check_all_eaten(philos) == 0)
 			p->dead = get_ms() - p->data->timestamp_init;
 		pthread_mutex_init(p->data->died, NULL);
 	}
 }
 
-int	check_if_everyone_has_eaten(t_philosopher **philosophers)
+int	check_all_eaten(t_philosopher **philosophers)
 {
 	int	i;
 	int	times_must_eat;

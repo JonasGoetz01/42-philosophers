@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 18:56:27 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/12 14:32:02 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/12 17:11:04 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	input_check(int argc, char **argv)
 				j++;
 				continue ;
 			}
-			if ((argv[i][j] < 48 || argv[i][j] > 57))
+			if (!ft_isdigit(argv[i][j]))
 				return (1);
 			j++;
 		}

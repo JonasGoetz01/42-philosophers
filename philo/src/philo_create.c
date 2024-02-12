@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:44:54 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/12 14:32:02 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/12 17:12:00 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ t_philosopher	**philo_create(t_data *data, pthread_mutex_t *forks)
 		philosophers[i]->id = i;
 		philosophers[i]->times_eaten = 0;
 		if (i == 0)
-			philosophers[i]->fork_left = &forks[philosophers[i]->data->num_philos
-				- 1];
+			philosophers[i]->fork_left = 
+				&forks[philosophers[i]->data->num_philos - 1];
 		else
 			philosophers[i]->fork_left = &forks[i - 1];
 		philosophers[i]->fork_right = &forks[i];
