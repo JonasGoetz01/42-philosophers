@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:45:26 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/12 14:32:02 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/12 17:38:37 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,28 +45,6 @@ int	ft_atoi(const char *str)
 	else if (ret < -2147483648)
 		return (0);
 	return ((int)ret);
-}
-
-long	ft_atoi_l(const char *str)
-{
-	int		sign;
-	long	ret;
-
-	ret = 0;
-	sign = 1;
-	while (*str == ' ' || *str == '\t' || *str == '\n' || *str == '\v'
-		|| *str == '\f' || *str == '\r')
-		++str;
-	if (*str == '+' || *str == '-')
-		if (*(str++) == '-')
-			sign *= -1;
-	while (ft_isdigit(*str))
-		ret = ret * 10 + sign * (*str++ - '0');
-	if (ret > 2147483647)
-		return (-1);
-	else if (ret < -2147483648)
-		return (0);
-	return (ret);
 }
 
 void	mutex_init(pthread_mutex_t *mutex, int n)

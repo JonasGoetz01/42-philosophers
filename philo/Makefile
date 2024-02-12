@@ -9,7 +9,7 @@ SRCCFILES := input.c \
 			 log.c \
 			 utils.c \
 			 philo_create.c \
-			 philo_runtime.c \
+			 philo_routine.c \
 			 time.c \
 			 philo_checker.c \
 			 philos.c
