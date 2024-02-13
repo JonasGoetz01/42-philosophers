@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_runtime.c                                    :+:      :+:    :+:   */
+/*   philo_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:45:08 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/12 14:32:02 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/13 17:23:14 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	philo_runtime(t_philosopher *p)
 		ft_eat(p);
 		ft_sleep(p);
 		ft_log(*(p->data->log), p->data->timestamp_init, p->id, THINK);
-		p->times_eaten++;
 	}
 	return (0);
 }
@@ -45,10 +44,10 @@ void	ft_eat(t_philosopher *p)
 	ft_log(*(p->data->log), p->data->timestamp_init, p->id, FORK);
 	ft_log(*(p->data->log), p->data->timestamp_init, p->id, EAT);
 	sleep_ms(p->data->time_to_eat);
-	pthread_mutex_unlock(p->fork_left);
-	pthread_mutex_unlock(p->fork_right);
 	p->last_time_eaten = get_ms();
 	p->times_eaten++;
+	pthread_mutex_unlock(p->fork_left);
+	pthread_mutex_unlock(p->fork_right);
 }
 
 void	ft_sleep(t_philosopher *p)
