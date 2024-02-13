@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 20:14:41 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/12 17:39:24 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/13 16:36:54 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,12 @@ void				check_if_dead(t_philosopher *p);
 void				ft_eat(t_philosopher *p);
 void				ft_sleep(t_philosopher *p);
 int					has_eaten_enough(t_philosopher *p);
-void				dead_checker(t_philosopher **philos,
-						t_philosopher *p);
+void				dead_checker(t_philosopher **philos, t_philosopher *p);
 int					check_all_eaten(t_philosopher **philosophers);
 void				log_death(t_philosopher **philosophers);
 int					ft_strlen(char *str);
 int					input_check(int argc, char **argv);
 int					input_parse(t_data *data, int argc, char **argv);
 int					ft_isdigit(int c);
+void				ft_exit(void);
 #endif

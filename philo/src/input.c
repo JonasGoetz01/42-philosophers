@@ -6,11 +6,12 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 18:56:27 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/12 17:11:04 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/13 16:37:54 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philos.h"
+#include <limits.h>
 
 int	input_parse(t_data *data, int argc, char **argv)
 {

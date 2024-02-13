@@ -8,6 +8,7 @@ WFLAGS := -Wall -Werror -Wextra
 SRCCFILES := input.c \
 			 log.c \
 			 utils.c \
+			 utils2.c \
 			 philo_create.c \
 			 philo_routine.c \
 			 time.c \

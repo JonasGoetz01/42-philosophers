@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:45:26 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/12 17:38:37 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/13 16:38:23 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,15 @@ int	ft_atoi(const char *str)
 		if (*(str++) == '-')
 			sign *= -1;
 	while (ft_isdigit(*str))
+	{
 		ret = ret * 10 + sign * (*str++ - '0');
-	if (ret > 2147483647)
-		return (-1);
-	else if (ret < -2147483648)
-		return (0);
+		if (ret > LONG_MAX)
+			ft_exit();
+	}
+	if (ret > INT_MAX)
+		ft_exit();
+	else if (ret < INT_MIN)
+		ft_exit();
 	return ((int)ret);
 }
 
