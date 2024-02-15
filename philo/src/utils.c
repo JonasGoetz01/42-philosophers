@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:45:26 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/13 16:38:23 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/15 17:22:02 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ void	mutex_init(pthread_mutex_t *mutex, int n)
 	int	i;
 
 	i = 0;
-	while (i++ < n)
+	while (i < n)
+	{
 		pthread_mutex_init(&mutex[i], NULL);
+		i++;
+	}
 }

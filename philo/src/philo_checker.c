@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 18:03:33 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/12 17:11:34 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/15 17:11:57 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,20 @@ void	philo_checker(t_philosopher **philos)
 	{
 		i = 0;
 		while (philos[i])
-			dead_checker(philos, philos[i++]);
+		{
+			dead_checker(philos, philos[i]);
+			i++;
+		}
 		check_all_eaten(philos);
 	}
 }
 
+#include <stdio.h>
+
 void	dead_checker(t_philosopher **philos, t_philosopher *p)
 {
+	// printf("%ld %ld %ld %d\n", timestamp_init, get_ms() - timestamp_init,
+	// 	p->last_time_eaten, p->data->time_to_die);
 	if (get_ms() - p->last_time_eaten > p->data->time_to_die)
 	{
 		if (check_all_eaten(philos) == 0)

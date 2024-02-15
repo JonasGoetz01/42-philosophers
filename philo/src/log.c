@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:15:21 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/12 14:32:02 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/15 16:20:57 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ void	ft_log(pthread_mutex_t mutex, long timestamp_init, int id,
 		char *message)
 {
 	pthread_mutex_lock(&mutex);
-	printf("%ld %i %s\n", get_ms() - timestamp_init, id + 1,
-		message);
+	printf("%ld %i %s\n", get_ms() - timestamp_init, id + 1, message);
 	pthread_mutex_unlock(&mutex);
 }
 
@@ -30,7 +29,9 @@ void	log_death(t_philosopher **philosophers)
 	{
 		if (philosophers[i]->dead)
 		{
+			pthread_mutex_lock(philosophers[i]->data->log);
 			printf("%ld %i died\n", philosophers[i]->dead, i + 1);
+			pthread_mutex_unlock(philosophers[i]->data->log);
 			exit(0);
 		}
 		i++;

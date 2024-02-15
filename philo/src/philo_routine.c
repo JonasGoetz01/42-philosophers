@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:45:08 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/13 17:23:14 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/15 17:35:32 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 
 int	philo_runtime(t_philosopher *p)
 {
-	if (p->data->num_philos == 1)
-	{
-		pthread_mutex_lock(p->fork_left);
-		ft_log(*(p->data->log), p->data->timestamp_init, p->id, FORK);
-		sleep_ms(p->data->time_to_die);
-	}
 	if (!p)
 		return (1);
 	if (p->id == 0)
@@ -29,9 +23,19 @@ int	philo_runtime(t_philosopher *p)
 		sleep_ms(5);
 	while (has_eaten_enough(p) == 0)
 	{
-		ft_eat(p);
-		ft_sleep(p);
+		pthread_mutex_lock(p->fork_left);
+		ft_log(*(p->data->log), p->data->timestamp_init, p->id, FORK);
+		pthread_mutex_lock(p->fork_right);
+		ft_log(*(p->data->log), p->data->timestamp_init, p->id, FORK);
+		ft_log(*(p->data->log), p->data->timestamp_init, p->id, EAT);
+		sleep_ms(p->data->time_to_eat);
+		pthread_mutex_unlock(p->fork_left);
+		pthread_mutex_unlock(p->fork_right);
+		p->last_time_eaten = get_ms();
+		ft_log(*(p->data->log), p->data->timestamp_init, p->id, SLEEP);
+		sleep_ms(p->data->time_to_sleep);
 		ft_log(*(p->data->log), p->data->timestamp_init, p->id, THINK);
+		p->times_eaten++;
 	}
 	return (0);
 }

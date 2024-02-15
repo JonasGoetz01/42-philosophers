@@ -31,7 +31,10 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f philosophers
+
+helgrind:
+	@valgrind --tool=helgrind -s ./philo 2 800 500 500
 
 re: fclean all
 
+.PHONY: helgrind re fclean all clean

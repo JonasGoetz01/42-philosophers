@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 18:56:27 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/13 16:37:54 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/15 16:25:56 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	input_parse(t_data *data, int argc, char **argv)
 {
 	if (input_check(argc, argv))
 		return (1);
+	data->timestamp_init = get_ms();
 	data->num_philos = ft_atoi(argv[1]);
 	if (data->num_philos > 200)
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:45:13 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/13 15:50:06 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/15 16:41:38 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	main(int argc, char **argv)
 	while (pthread_mutex_lock(&(vars.died)))
 		printf("");
 	threads_detach(vars.threads, &data);
+	sleep_ms(2);
 	log_death(philosophers);
 	return (0);
 }
