@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/07 19:45:21 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/15 16:30:33 by jgotz            ###   ########.fr       */
+/*   Created: 2024/02/21 20:22:20 by jgotz             #+#    #+#             */
+/*   Updated: 2024/02/21 20:31:20 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philos.h"
+#include "philo.h"
 
 long	get_ms(void)
 {
@@ -20,11 +20,31 @@ long	get_ms(void)
 	return (current_time.tv_sec * 1000 + current_time.tv_usec / 1000);
 }
 
-void	sleep_ms(int ms)
+long	get_elapsed(t_table *tbl)
 {
-	long	start;
+	long			curtime;
+	struct timeval	tv;
 
-	start = get_ms();
-	while (get_ms() - start < ms)
-		usleep(500);
+	gettimeofday(&tv, NULL);
+	curtime = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	return (curtime - tbl->sim_start);
+}
+
+int	sleep_ms(t_table *tbl, long time_ms)
+{
+	long	tmp;
+
+	tmp = get_ms();
+	while (get_ms() - tmp < time_ms)
+	{
+		usleep(50);
+		pthread_mutex_lock(&(tbl->end_mutex));
+		if (tbl->end_flag)
+		{
+			pthread_mutex_unlock(&(tbl->end_mutex));
+			return (1);
+		}
+		pthread_mutex_unlock(&(tbl->end_mutex));
+	}
+	return (0);
 }
