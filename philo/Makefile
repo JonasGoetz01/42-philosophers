@@ -1,25 +1,21 @@
 NAME = philo
 
-SRC := src
+SRC := src/
 
 WFLAGS := -Wall -Werror -Wextra
 
 # SRC
-SRCCFILES := input.c \
-			 log.c \
-			 utils.c \
-			 utils2.c \
-			 philo_create.c \
-			 philo_routine.c \
-			 time.c \
-			 philo_checker.c \
-			 philos.c
+SRCCFILES := $(SRC)input.c \
+			 $(SRC)log.c \
+			 $(SRC)utils.c \
+			 $(SRC)utils2.c \
+			 $(SRC)philo_create.c \
+			 $(SRC)philo_routine.c \
+			 $(SRC)time.c \
+			 $(SRC)philo_checker.c \
+			 $(SRC)philos.c
 
-SRCCFILES := $(addprefix $(SRC)/, $(SRCCFILES))
-
-# LIBS
-CFILES := $(SRCCFILES)
-OFILES := $(CFILES:.c=.o)
+OFILES := $(SRCCFILES:.c=.o)
 
 all: $(NAME)
 
