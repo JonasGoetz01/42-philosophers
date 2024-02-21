@@ -11,7 +11,7 @@ CFILES = philo_create.c \
 		 stop.c \
 		 time.c \
 		 utils.c \
-		 waiter.c
+		 supervisor.c
 
 OBJECTS = $(CFILES:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:22:41 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/21 20:18:14 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/21 21:09:46 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 int	alloc_table_dynamics(t_table *tbl)
 {
-	tbl->forks = ph_calloc(tbl->philos_amt, sizeof(pthread_mutex_t));
+	tbl->forks = ft_calloc(tbl->philos_amt, sizeof(pthread_mutex_t));
 	if (tbl->forks == NULL)
-		return (EXIT_FAILURE);
-	tbl->threads = ph_calloc(tbl->philos_amt, sizeof(pthread_t));
+		return (0);
+	tbl->threads = ft_calloc(tbl->philos_amt, sizeof(pthread_t));
 	if (tbl->threads == NULL)
 	{
 		free(tbl->forks);
-		return (EXIT_FAILURE);
+		return (0);
 	}
-	tbl->philos = ph_calloc(tbl->philos_amt, sizeof(t_philo));
+	tbl->philos = ft_calloc(tbl->philos_amt, sizeof(t_philo));
 	if (tbl->philos == NULL)
 	{
 		free(tbl->forks);
 		free(tbl->threads);
-		return (EXIT_FAILURE);
+		return (0);
 	}
-	return (EXIT_SUCCESS);
+	return (0);
 }
 
 int	fill_philo_mem(t_table *tbl, t_philo *ph)
@@ -40,10 +40,10 @@ int	fill_philo_mem(t_table *tbl, t_philo *ph)
 	i = 0;
 	while (i < tbl->philos_amt)
 	{
-		(&(ph[i]))->ph_num = i + 1;
-		(&(ph[i]))->t_2_die = tbl->t_2_die;
-		(&(ph[i]))->t_2_eat = tbl->t_2_eat;
-		(&(ph[i]))->t_2_sleep = tbl->t_2_sleep;
+		(&(ph[i]))->ft_num = i + 1;
+		(&(ph[i]))->ttdie = tbl->ttdie;
+		(&(ph[i]))->tteat = tbl->tteat;
+		(&(ph[i]))->ttsleep = tbl->ttsleep;
 		(&(ph[i]))->t_last_ate = 0;
 		(&(ph[i]))->meals_eaten = 0;
 		(&(ph[i]))->meals_goal = tbl->meals_goal;
@@ -53,7 +53,7 @@ int	fill_philo_mem(t_table *tbl, t_philo *ph)
 		(&(ph[i]))->done = 0;
 		i++;
 	}
-	return (EXIT_SUCCESS);
+	return (0);
 }
 
 void	fill_table_statics(t_table *tbl, int argc, char **argv)
@@ -69,11 +69,11 @@ void	fill_table_statics(t_table *tbl, int argc, char **argv)
 		tbl->philos_amt = ft_atoi(*(argv++));
 	tbl->philos_remaining = tbl->philos_amt;
 	if (argv && *argv)
-		tbl->t_2_die = ft_atoi(*(argv++));
+		tbl->ttdie = ft_atoi(*(argv++));
 	if (argv && *argv)
-		tbl->t_2_eat = ft_atoi(*(argv++));
+		tbl->tteat = ft_atoi(*(argv++));
 	if (argv)
-		tbl->t_2_sleep = ft_atoi(*(argv++));
+		tbl->ttsleep = ft_atoi(*(argv++));
 	if (argv && *argv)
 		tbl->meals_goal = ft_atoi(*argv);
 	if (tbl->meals_goal == -1)
@@ -87,33 +87,33 @@ int	check_table_statics(t_table *tbl)
 	if (tbl->philos_amt > MAX_PHIL)
 	{
 		printf("Too many philosophers!\n");
-		return (EXIT_FAILURE);
+		return (0);
 	}
-	else if (tbl->philos_amt == 0 || tbl->t_2_die == 0 || tbl->t_2_eat == 0
-		|| tbl->t_2_sleep == 0 || tbl->meals_goal == 0)
+	else if (tbl->philos_amt == 0 || tbl->ttdie == 0 || tbl->tteat == 0
+		|| tbl->ttsleep == 0 || tbl->meals_goal == 0)
 	{
-		printf("Input error!\n");
-		return (EXIT_FAILURE);
+		printf("Error\nWrong arguments\n");
+		return (1);
 	}
-	return (EXIT_SUCCESS);
+	return (0);
 }
 
 int	prep(t_table *tbl, int argc, char **argv)
 {
 	fill_table_statics(tbl, argc, argv);
-	if (check_table_statics(tbl) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (alloc_table_dynamics(tbl) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (fill_philo_mem(tbl, tbl->philos) == EXIT_FAILURE)
+	if (check_table_statics(tbl) == 0)
+		return (0);
+	if (alloc_table_dynamics(tbl) == 0)
+		return (0);
+	if (fill_philo_mem(tbl, tbl->philos) == 0)
 	{
 		free_mem(tbl);
-		return (EXIT_FAILURE);
+		return (0);
 	}
-	if (init_muts(tbl) == EXIT_FAILURE)
+	if (init_muts(tbl) == 0)
 	{
 		free_mem(tbl);
-		return (EXIT_FAILURE);
+		return (0);
 	}
-	return (EXIT_SUCCESS);
+	return (0);
 }

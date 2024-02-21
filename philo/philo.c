@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 20:20:40 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/21 20:20:52 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/21 20:37:06 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	main(int argc, char **argv)
 	t_table	table;
 	int		i;
 
-	if (prep(&table, argc, argv) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+	if (prep(&table, argc, argv) == 0)
+		return (0);
 	if (table.philos_amt == 1)
 	{
 		printf("0 1 has taken a fork\n");
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 		i = 0;
 		while (i < table.philos_amt)
 			pthread_join(table.threads[i++], NULL);
-		pthread_join(table.waiter, NULL);
+		pthread_join(table.supervisor, NULL);
 	}
 	destroy_muts(&table);
 	free_mem(&table);

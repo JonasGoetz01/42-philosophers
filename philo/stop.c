@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:25:58 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/21 20:30:26 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/21 20:48:21 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,14 @@ void	destroy_muts(t_table *tbl)
 	}
 	pthread_mutex_destroy(&(tbl->end_mutex));
 	pthread_mutex_destroy(&(tbl->start_mutex));
-	pthread_mutex_destroy(&(tbl->ph_remain_mutex));
+	pthread_mutex_destroy(&(tbl->remain_mutex));
 }
 
-void	*stop_sim(t_table *tbl, long time, int who)
+void	stop_sim(t_table *tbl, long time, int who)
 {
 	pthread_mutex_lock(&(tbl->end_mutex));
 	tbl->end_flag = 1;
 	if (time && who)
 		printf("%ld %d died\n", time, who);
 	pthread_mutex_unlock(&(tbl->end_mutex));
-	return (NULL);
 }
