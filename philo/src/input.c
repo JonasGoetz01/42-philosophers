@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 18:56:27 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/15 16:25:56 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/21 16:02:34 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ int	input_parse(t_data *data, int argc, char **argv)
 	if (input_check(argc, argv))
 		return (1);
 	data->timestamp_init = get_ms();
+	if (ft_atoi(argv[1]) == 0 || ft_atoi(argv[1]) == 0 || ft_atoi(argv[1]) == 0
+		|| ft_atoi(argv[1]) == 0)
+		return (1);
 	data->num_philos = ft_atoi(argv[1]);
 	if (data->num_philos > 200)
 		return (1);
@@ -25,7 +28,11 @@ int	input_parse(t_data *data, int argc, char **argv)
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
 	if (argv[5])
+	{
+		if (ft_atoi(argv[5]) == 0)
+			return (1);
 		data->num_must_eat = ft_atoi(argv[5]);
+	}
 	else
 		data->num_must_eat = -1;
 	return (0);
