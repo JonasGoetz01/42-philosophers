@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/jgotz/workspace/08_philosophers/philo/src",
-      "program": "/Users/jgotz/workspace/08_philosophers/philo/src/build/Debug/outDebug"
+      "cwd": "/Users/jgotz/workspace/08_philosophers/philo",
+      "program": "/Users/jgotz/workspace/08_philosophers/philo/build/Debug/outDebug"
     }
   ]
 }
