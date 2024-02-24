@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/jgotz/workspace/08_philosophers/philo",
+      "program": "/Users/jgotz/workspace/08_philosophers/philo/build/Debug/outDebug"
+    }
+  ]
+}
