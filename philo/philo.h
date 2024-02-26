@@ -120,7 +120,7 @@ void	destroy_muts(t_table *tbl);
 
 void	start_sim(t_table *tbl);
 
-void	*stop_sim(t_table *tbl, long time, int who);
+void	stop_sim(t_table *tbl, long time, int who);
 
 void	*die(t_philo *ph, int to_unlock);
 
