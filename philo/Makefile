@@ -1,33 +1,35 @@
-NAME = philo
+NAME=philo
 
-SRC := src/
+CC=cc
+CFLAGS = -Wall -Wextra -Werror
 
-WFLAGS := -Wall -Werror -Wextra
 
-# SRC
-SRCCFILES := $(SRC)input.c \
-			 $(SRC)log.c \
-			 $(SRC)utils.c \
-			 $(SRC)utils2.c \
-			 $(SRC)philo_create.c \
-			 $(SRC)philo_routine.c \
-			 $(SRC)time.c \
-			 $(SRC)philo_checker.c \
-			 $(SRC)philos.c
+CFILES = philo_create.c \
+		 philo.c \
+		 prep.c \
+		 philo_routine.c \
+		 stop.c \
+		 time.c \
+		 utils.c \
+		 waiter.c
 
-OFILES := $(SRCCFILES:.c=.o)
+OBJECTS = $(CFILES:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OFILES)
-	cc $(WFLAGS) $(OFILES) -o $(NAME) 
+%.o : %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
 
-clean: 
-	rm -f $(OFILES)
+$(NAME): $(OBJECTS)
+	$(CC) $(CFLAGS) $(CFILES) -o $(NAME)
 
-fclean: clean
-	rm -f $(NAME)
+clean:
+	rm -f $(OBJECTS)
+
+fclean:	clean
+	rm -f philo
+
+helgrind:
+	@valgrind --tool=helgrind -s ./philo 3 800 600 600
 
 re: fclean all
-
-.PHONY: helgrind re fclean all clean
