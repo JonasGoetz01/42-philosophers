@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:22:41 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/26 11:05:46 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/26 12:51:39 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 int	alloc_table(t_table *tbl)
 {
-	tbl->forks = ft_calloc(tbl->philos_amt, sizeof(pthread_mutex_t));
+	tbl->forks = ft_calloc(tbl->philos_num, sizeof(pthread_mutex_t));
 	if (tbl->forks == NULL)
 		return (EXIT_FAILURE);
-	tbl->threads = ft_calloc(tbl->philos_amt, sizeof(pthread_t));
+	tbl->threads = ft_calloc(tbl->philos_num, sizeof(pthread_t));
 	if (tbl->threads == NULL)
 	{
 		free(tbl->forks);
 		return (EXIT_FAILURE);
 	}
-	tbl->philos = ft_calloc(tbl->philos_amt, sizeof(t_philo));
+	tbl->philos = ft_calloc(tbl->philos_num, sizeof(t_philo));
 	if (tbl->philos == NULL)
 	{
 		free(tbl->forks);
@@ -38,7 +38,7 @@ int	init_philo(t_table *tbl, t_philo *ph)
 	int	i;
 
 	i = 0;
-	while (i < tbl->philos_amt)
+	while (i < tbl->philos_num)
 	{
 		(&(ph[i]))->ph_num = i + 1;
 		(&(ph[i]))->t_2_die = tbl->t_2_die;
@@ -48,7 +48,7 @@ int	init_philo(t_table *tbl, t_philo *ph)
 		(&(ph[i]))->meals_eaten = 0;
 		(&(ph[i]))->meals_goal = tbl->meals_goal;
 		(&(ph[i]))->fork_l = &(tbl->forks[i]);
-		(&(ph[i]))->fork_r = &(tbl->forks[(i + 1) % tbl->philos_amt]);
+		(&(ph[i]))->fork_r = &(tbl->forks[(i + 1) % tbl->philos_num]);
 		(&(ph[i]))->table = tbl;
 		(&(ph[i]))->done = 0;
 		i++;
@@ -61,13 +61,13 @@ void	init_table(t_table *tbl, int argc, char **argv)
 	tbl->meals_goal = -1;
 	tbl->sim_start = 0;
 	tbl->end_flag = 0;
-	tbl->philos_amt = 0;
+	tbl->philos_num = 0;
 	if (argc < 5 || argc > 6 || !argv || !(*argv))
 		return ;
 	argv++;
 	if (argv && *argv)
-		tbl->philos_amt = ft_atoi(*(argv++));
-	tbl->philos_remaining = tbl->philos_amt;
+		tbl->philos_num = ft_atoi(*(argv++));
+	tbl->philos_remaining = tbl->philos_num;
 	if (argv && *argv)
 		tbl->t_2_die = ft_atoi(*(argv++));
 	if (argv && *argv)
@@ -84,13 +84,13 @@ void	init_table(t_table *tbl, int argc, char **argv)
 
 int	check_table_statics(t_table *tbl)
 {
-	if (tbl->philos_amt > MAX_PHIL)
+	if (tbl->philos_num > MAX_PHIL)
 	{
 		printf("Too many philosophers!\n");
 		return (EXIT_FAILURE);
 	}
-	else if (tbl->philos_amt == 0 || tbl->t_2_die == 0 || tbl->t_2_eat == 0
-		|| tbl->t_2_sleep == 0 || tbl->meals_goal == 0)
+	else if (tbl->philos_num <= 0 || tbl->t_2_die <= 0 || tbl->t_2_eat <= 0
+		|| tbl->t_2_sleep <= 0 || tbl->meals_goal == 0 || tbl->meals_goal < -1)
 	{
 		printf("Input error!\n");
 		return (EXIT_FAILURE);

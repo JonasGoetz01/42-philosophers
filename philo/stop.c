@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:25:58 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/26 11:11:07 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/26 12:36:29 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	destroy_muts(t_table *tbl)
 	int	i;
 
 	i = 0;
-	while (i < tbl->philos_amt)
+	while (i < tbl->philos_num)
 	{
 		pthread_mutex_destroy(&(tbl->forks[i]));
 		pthread_mutex_destroy(&(tbl->philos[i].meal_eaten_mutex));

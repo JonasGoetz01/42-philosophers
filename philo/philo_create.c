@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:22:41 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/26 10:58:03 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/26 12:36:52 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	start_sim(t_table *tbl)
 	int	i;
 
 	i = 0;
-	while (i < tbl->philos_amt)
+	while (i < tbl->philos_num)
 	{
 		pthread_create(&(tbl->threads[i]), NULL, philo_routine,
 			&(tbl->philos[i]));
@@ -31,10 +31,10 @@ int	init_muts_ph(t_table *tbl)
 	int	i;
 
 	i = 0;
-	while (i < tbl->philos_amt)
+	while (i < tbl->philos_num)
 		pthread_mutex_init(&(tbl->forks[i++]), NULL);
 	i = 0;
-	while (i < tbl->philos_amt)
+	while (i < tbl->philos_num)
 		pthread_mutex_init(&(tbl->philos[i++].meal_eaten_mutex), NULL);
 	return (EXIT_SUCCESS);
 }

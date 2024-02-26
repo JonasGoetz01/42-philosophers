@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:26:21 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/26 11:13:19 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/26 12:36:28 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	*waiter_check(t_table *tbl)
 	long	time;
 
 	i = 0;
-	while (i < tbl->philos_amt)
+	while (i < tbl->philos_num)
 	{
 		if (all_ate_check(tbl))
 		{

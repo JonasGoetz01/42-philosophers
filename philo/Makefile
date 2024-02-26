@@ -30,6 +30,6 @@ fclean:	clean
 	rm -f philo
 
 helgrind:
-	@valgrind --tool=helgrind -s ./philo 1 800 500 500
+	@valgrind --tool=helgrind -s ./philo 3 800 600 600
 
 re: fclean all

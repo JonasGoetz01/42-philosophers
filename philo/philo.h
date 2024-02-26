@@ -55,7 +55,7 @@ typedef struct s_table
 	int				meals_goal;
 	char			end_flag;
 	long			sim_start;
-	int				philos_amt;
+	int				philos_num;
 	int				philos_remaining;
 	int				t_2_die;
 	int				t_2_eat;

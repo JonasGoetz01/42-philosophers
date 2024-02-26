@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:26:15 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/26 11:13:08 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/26 12:51:22 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	ft_atoi(const char *str)
 	if (ret > INT_MAX)
 		return (0);
 	else if (ret < INT_MIN)
+		return (0);
+	if (ret < 0)
 		return (0);
 	return ((int)ret);
 }
