@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:25:35 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/26 10:59:08 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/26 11:07:14 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ void	*ft_eat(t_philo *ph, pthread_mutex_t *r, pthread_mutex_t *l)
 	pthread_mutex_lock(&(ph->table->end_mutex));
 	if (ph->table->end_flag)
 		return (die(ph, UNL_END | UNL_LEFT));
-	printf("%ld %d has taken a fork\n", get_elapsed(ph->table), ph->ph_num);
+	printf("%ld %d has taken a fork\n", get_ms_elapsed(ph->table), ph->ph_num);
 	pthread_mutex_unlock(&(ph->table->end_mutex));
 	pthread_mutex_lock(r);
 	pthread_mutex_lock(&(ph->table->end_mutex));
 	if (ph->table->end_flag)
 		return (die(ph, UNL_END | UNL_LEFT | UNL_RIGHT));
-	printf("%ld %d has taken a fork\n", get_elapsed(ph->table), ph->ph_num);
+	printf("%ld %d has taken a fork\n", get_ms_elapsed(ph->table), ph->ph_num);
 	pthread_mutex_unlock(&(ph->table->end_mutex));
 	pthread_mutex_lock(&(ph->last_ate_mutex));
-	ph->t_last_ate = get_elapsed(ph->table);
+	ph->t_last_ate = get_ms_elapsed(ph->table);
 	pthread_mutex_unlock(&(ph->last_ate_mutex));
 	pthread_mutex_lock(&(ph->table->end_mutex));
 	if (ph->table->end_flag)
@@ -45,12 +45,12 @@ void	*ft_sleep(t_philo *ph)
 	pthread_mutex_lock(&(ph->table->end_mutex));
 	if (ph->table->end_flag)
 		return (die(ph, UNL_END));
-	printf("%ld %d is sleeping\n", get_elapsed(ph->table), ph->ph_num);
+	printf("%ld %d is sleeping\n", get_ms_elapsed(ph->table), ph->ph_num);
 	pthread_mutex_unlock(&(ph->table->end_mutex));
 	sleep_ms(ph->table, ph->t_2_sleep);
 	pthread_mutex_lock(&(ph->table->end_mutex));
 	if (!ph->table->end_flag)
-		printf("%ld %d is thinking\n", get_elapsed(ph->table), ph->ph_num);
+		printf("%ld %d is thinking\n", get_ms_elapsed(ph->table), ph->ph_num);
 	else
 		return (die(ph, UNL_END));
 	pthread_mutex_unlock(&(ph->table->end_mutex));

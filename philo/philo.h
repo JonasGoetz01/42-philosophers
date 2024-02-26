@@ -68,7 +68,7 @@ typedef struct s_table
 	int t_2_die;
 	int t_2_eat;
 	int t_2_sleep;
-	int is_food_limited;
+	int is_meals_goal;
 	pthread_mutex_t start_mutex;
 	pthread_mutex_t end_mutex;
 	pthread_mutex_t ft_remain_mutex;
@@ -82,9 +82,9 @@ void	*ft_calloc(size_t count, size_t size);
 
 int	ft_atoi(const char *str);
 
-int	alloc_table_dynamics(t_table *tbl);
+int	alloc_table(t_table *tbl);
 
-int	fill_philo_mem(t_table *tbl, t_philo *ph);
+int	init_philo(t_table *tbl, t_philo *ph);
 
 int	prep(t_table *tbl, int argc, char **argv);
 
@@ -98,7 +98,7 @@ void	*philo_loop(t_philo *ph);
 
 long	get_ms(void);
 
-long	get_elapsed(t_table *tbl);
+long	get_ms_elapsed(t_table *tbl);
 
 int	sleep_ms(t_table *tbl, long time_ms);
 

@@ -6,13 +6,13 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:22:41 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/26 10:58:20 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/26 11:05:46 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	alloc_table_dynamics(t_table *tbl)
+int	alloc_table(t_table *tbl)
 {
 	tbl->forks = ft_calloc(tbl->philos_amt, sizeof(pthread_mutex_t));
 	if (tbl->forks == NULL)
@@ -33,7 +33,7 @@ int	alloc_table_dynamics(t_table *tbl)
 	return (EXIT_SUCCESS);
 }
 
-int	fill_philo_mem(t_table *tbl, t_philo *ph)
+int	init_philo(t_table *tbl, t_philo *ph)
 {
 	int	i;
 
@@ -56,7 +56,7 @@ int	fill_philo_mem(t_table *tbl, t_philo *ph)
 	return (EXIT_SUCCESS);
 }
 
-void	fill_table_statics(t_table *tbl, int argc, char **argv)
+void	init_table(t_table *tbl, int argc, char **argv)
 {
 	tbl->meals_goal = -1;
 	tbl->sim_start = 0;
@@ -77,9 +77,9 @@ void	fill_table_statics(t_table *tbl, int argc, char **argv)
 	if (argv && *argv)
 		tbl->meals_goal = ft_atoi(*argv);
 	if (tbl->meals_goal == -1)
-		tbl->is_food_limited = 0;
+		tbl->is_meals_goal = 0;
 	else
-		tbl->is_food_limited = 1;
+		tbl->is_meals_goal = 1;
 }
 
 int	check_table_statics(t_table *tbl)
@@ -100,12 +100,12 @@ int	check_table_statics(t_table *tbl)
 
 int	prep(t_table *tbl, int argc, char **argv)
 {
-	fill_table_statics(tbl, argc, argv);
+	init_table(tbl, argc, argv);
 	if (check_table_statics(tbl) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (alloc_table_dynamics(tbl) == EXIT_FAILURE)
+	if (alloc_table(tbl) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (fill_philo_mem(tbl, tbl->philos) == EXIT_FAILURE)
+	if (init_philo(tbl, tbl->philos) == EXIT_FAILURE)
 	{
 		free_mem(tbl);
 		return (EXIT_FAILURE);

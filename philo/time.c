@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 20:22:20 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/21 20:31:20 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/26 11:07:13 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ long	get_ms(void)
 	return (current_time.tv_sec * 1000 + current_time.tv_usec / 1000);
 }
 
-long	get_elapsed(t_table *tbl)
+long	get_ms_elapsed(t_table *tbl)
 {
 	long			curtime;
 	struct timeval	tv;

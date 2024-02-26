@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:26:21 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/26 10:58:03 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/26 11:07:12 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	is_this_philo_done(t_table *tbl, int i)
 
 void	*waiter_check(t_table *tbl)
 {
-	int			i;
+	int		i;
 	long	time;
 
 	i = 0;
@@ -47,7 +47,7 @@ void	*waiter_check(t_table *tbl)
 	{
 		if (all_ate_check(tbl))
 			return (stop_sim(tbl, 0, 0));
-		time = get_elapsed(tbl);
+		time = get_ms_elapsed(tbl);
 		if (is_dead(time, &(tbl->philos[i])))
 		{
 			return (stop_sim(tbl, time, i + 1));
