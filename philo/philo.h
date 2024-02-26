@@ -19,8 +19,8 @@
 # define MAX_PHIL 200
 # define MAX_TIME 1000000000
 
-# define PH_FREE_NON 1
-# define PH_FREE_ALL 2
+# define ft_FREE_NON 1
+# define ft_FREE_ALL 2
 
 # define UNL_NONE 0
 # define UNL_LEFT 1
@@ -71,14 +71,14 @@ typedef struct s_table
 	int is_food_limited;
 	pthread_mutex_t start_mutex;
 	pthread_mutex_t end_mutex;
-	pthread_mutex_t ph_remain_mutex;
+	pthread_mutex_t ft_remain_mutex;
 	pthread_mutex_t *forks;
 	t_philo *philos;
 	pthread_t *threads;
 	pthread_t waiter;
 } t_table;
 
-void	*ph_calloc(size_t count, size_t size);
+void	*ft_calloc(size_t count, size_t size);
 
 int	ft_atoi(const char *str);
 
@@ -88,13 +88,13 @@ int	fill_philo_mem(t_table *tbl, t_philo *ph);
 
 int	prep(t_table *tbl, int argc, char **argv);
 
-void	*ph_eat(t_philo *ph, pthread_mutex_t *r, pthread_mutex_t *l);
+void	*ft_eat(t_philo *ph, pthread_mutex_t *r, pthread_mutex_t *l);
 
-void	*ph_sleep(t_philo *ph);
+void	*ft_sleep(t_philo *ph);
 
-void	ph_think(t_philo *ph);
+void	ft_think(t_philo *ph);
 
-void	*philo_live(t_philo *ph);
+void	*philo_loop(t_philo *ph);
 
 long	get_ms(void);
 

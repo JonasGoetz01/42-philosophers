@@ -6,13 +6,13 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:25:35 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/21 20:31:08 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/26 10:59:08 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*ph_eat(t_philo *ph, pthread_mutex_t *r, pthread_mutex_t *l)
+void	*ft_eat(t_philo *ph, pthread_mutex_t *r, pthread_mutex_t *l)
 {
 	pthread_mutex_lock(l);
 	pthread_mutex_lock(&(ph->table->end_mutex));
@@ -40,7 +40,7 @@ void	*ph_eat(t_philo *ph, pthread_mutex_t *r, pthread_mutex_t *l)
 	return (NULL);
 }
 
-void	*ph_sleep(t_philo *ph)
+void	*ft_sleep(t_philo *ph)
 {
 	pthread_mutex_lock(&(ph->table->end_mutex));
 	if (ph->table->end_flag)
@@ -50,15 +50,14 @@ void	*ph_sleep(t_philo *ph)
 	sleep_ms(ph->table, ph->t_2_sleep);
 	pthread_mutex_lock(&(ph->table->end_mutex));
 	if (!ph->table->end_flag)
-		printf("%ld %d is thinking\n", \
-		get_elapsed(ph->table), ph->ph_num);
+		printf("%ld %d is thinking\n", get_elapsed(ph->table), ph->ph_num);
 	else
 		return (die(ph, UNL_END));
 	pthread_mutex_unlock(&(ph->table->end_mutex));
 	return (NULL);
 }
 
-int	logmeal(t_philo *ph)
+int	log_eat(t_philo *ph)
 {
 	pthread_mutex_lock(&(ph->meal_eaten_mutex));
 	if (ph->meals_eaten >= ph->meals_goal)
@@ -69,16 +68,16 @@ int	logmeal(t_philo *ph)
 	ph->meals_eaten++;
 	if (ph->meals_eaten == ph->meals_goal)
 	{
-		pthread_mutex_lock(&(ph->table->ph_remain_mutex));
+		pthread_mutex_lock(&(ph->table->ft_remain_mutex));
 		ph->table->philos_remaining -= 1;
-		pthread_mutex_unlock(&(ph->table->ph_remain_mutex));
+		pthread_mutex_unlock(&(ph->table->ft_remain_mutex));
 		ph->meals_eaten = ph->meals_goal + 1;
 	}
 	pthread_mutex_unlock(&(ph->meal_eaten_mutex));
 	return (0);
 }
 
-void	*philo_live(t_philo *ph)
+void	*philo_loop(t_philo *ph)
 {
 	while (1)
 	{
@@ -86,8 +85,8 @@ void	*philo_live(t_philo *ph)
 		if (ph->table->end_flag)
 			return (die(ph, UNL_END));
 		pthread_mutex_unlock(&(ph->table->end_mutex));
-		ph_eat(ph, ph->fork_r, ph->fork_l);
-		logmeal(ph);
+		ft_eat(ph, ph->fork_r, ph->fork_l);
+		log_eat(ph);
 		pthread_mutex_lock(&(ph->table->end_mutex));
 		if (ph->table->end_flag)
 			return (die(ph, UNL_END));
@@ -98,7 +97,7 @@ void	*philo_live(t_philo *ph)
 		if (ph->table->end_flag)
 			return (die(ph, UNL_END));
 		pthread_mutex_unlock(&(ph->table->end_mutex));
-		ph_sleep(ph);
+		ft_sleep(ph);
 	}
 }
 
@@ -121,5 +120,5 @@ void	*philo_routine(void *arg)
 	}
 	if (ph->ph_num % 2 == 1)
 		sleep_ms(ph->table, ph->t_2_sleep / 2);
-	return (philo_live(ph));
+	return (philo_loop(ph));
 }

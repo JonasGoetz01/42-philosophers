@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:26:21 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/21 20:29:50 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/26 10:58:03 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	all_ate_check(t_table *tbl)
 {
-	pthread_mutex_lock(&(tbl->ph_remain_mutex));
+	pthread_mutex_lock(&(tbl->ft_remain_mutex));
 	if (tbl->philos_remaining < 1)
 	{
-		pthread_mutex_unlock(&(tbl->ph_remain_mutex));
+		pthread_mutex_unlock(&(tbl->ft_remain_mutex));
 		return (1);
 	}
-	pthread_mutex_unlock(&(tbl->ph_remain_mutex));
+	pthread_mutex_unlock(&(tbl->ft_remain_mutex));
 	return (0);
 }
 

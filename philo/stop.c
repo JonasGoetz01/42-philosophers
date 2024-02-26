@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:25:58 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/21 20:30:26 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/26 10:58:03 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	destroy_muts(t_table *tbl)
 	}
 	pthread_mutex_destroy(&(tbl->end_mutex));
 	pthread_mutex_destroy(&(tbl->start_mutex));
-	pthread_mutex_destroy(&(tbl->ph_remain_mutex));
+	pthread_mutex_destroy(&(tbl->ft_remain_mutex));
 }
 
 void	*stop_sim(t_table *tbl, long time, int who)

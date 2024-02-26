@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   philo_create.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:22:41 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/21 18:23:52 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/26 10:58:03 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,52 +32,24 @@ int	init_muts_ph(t_table *tbl)
 
 	i = 0;
 	while (i < tbl->philos_amt)
-		if (pthread_mutex_init(&(tbl->forks[i++]), NULL) != 0)
-			break ;
-	if (i < tbl->philos_amt)
-	{
-		while (i >= 0)
-			pthread_mutex_destroy(&(tbl->forks[i--]));
-		return (EXIT_FAILURE);
-	}
+		pthread_mutex_init(&(tbl->forks[i++]), NULL);
 	i = 0;
 	while (i < tbl->philos_amt)
-		if (pthread_mutex_init(&(tbl->philos[i++].meal_eaten_mutex), NULL) != 0)
-			break ;
-	if (i < tbl->philos_amt)
-	{
-		while (i >= 0)
-			pthread_mutex_destroy(&(tbl->philos[i--].meal_eaten_mutex));
-		while (++i < tbl->philos_amt)
-			pthread_mutex_destroy(&(tbl->forks[i]));
-		return (EXIT_FAILURE);
-	}
+		pthread_mutex_init(&(tbl->philos[i++].meal_eaten_mutex), NULL);
 	return (EXIT_SUCCESS);
 }
 
 int	init_muts_tbl(t_table *tbl)
 {
-	if (pthread_mutex_init(&(tbl->start_mutex), NULL) != 0)
-		return (EXIT_FAILURE);
-	if (pthread_mutex_init(&(tbl->end_mutex), NULL) != 0)
-	{
-		pthread_mutex_destroy(&(tbl->start_mutex));
-		return (EXIT_FAILURE);
-	}
-	if (pthread_mutex_init(&(tbl->ph_remain_mutex), NULL) != 0)
-	{
-		pthread_mutex_destroy(&(tbl->start_mutex));
-		pthread_mutex_destroy(&(tbl->end_mutex));
-		return (EXIT_FAILURE);
-	}
+	pthread_mutex_init(&(tbl->start_mutex), NULL);
+	pthread_mutex_init(&(tbl->end_mutex), NULL);
+	pthread_mutex_init(&(tbl->ft_remain_mutex), NULL);
 	return (EXIT_SUCCESS);
 }
 
 int	init_muts(t_table *tbl)
 {
-	if (init_muts_tbl(tbl) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (init_muts_ph(tbl) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+	init_muts_tbl(tbl);
+	init_muts_ph(tbl);
 	return (EXIT_SUCCESS);
 }

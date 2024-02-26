@@ -6,13 +6,13 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:26:15 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/21 20:29:50 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/26 10:58:22 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*ph_calloc(size_t count, size_t size)
+void	*ft_calloc(size_t count, size_t size)
 {
 	unsigned char	*ptr;
 	int				offset;
@@ -91,12 +91,12 @@ void	*die(t_philo *ph, int to_unlock)
 	if (to_unlock & UNL_MEAL)
 		pthread_mutex_unlock(&(ph->meal_eaten_mutex));
 	if (to_unlock & UNL_REM)
-		pthread_mutex_unlock(&(ph->table->ph_remain_mutex));
+		pthread_mutex_unlock(&(ph->table->ft_remain_mutex));
 	if (to_unlock & UNL_LAST)
 		pthread_mutex_unlock(&(ph->last_ate_mutex));
-	pthread_mutex_lock(&(ph->table->ph_remain_mutex));
+	pthread_mutex_lock(&(ph->table->ft_remain_mutex));
 	ph->table->philos_remaining -= 1;
-	pthread_mutex_unlock(&(ph->table->ph_remain_mutex));
+	pthread_mutex_unlock(&(ph->table->ft_remain_mutex));
 	pthread_mutex_lock(&(ph->meal_eaten_mutex));
 	ph->meals_eaten = ph->meals_goal + 1;
 	pthread_mutex_unlock(&(ph->meal_eaten_mutex));

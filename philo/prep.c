@@ -6,7 +6,7 @@
 /*   By: jgotz <jgotz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:22:41 by jgotz             #+#    #+#             */
-/*   Updated: 2024/02/21 20:18:14 by jgotz            ###   ########.fr       */
+/*   Updated: 2024/02/26 10:58:20 by jgotz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 int	alloc_table_dynamics(t_table *tbl)
 {
-	tbl->forks = ph_calloc(tbl->philos_amt, sizeof(pthread_mutex_t));
+	tbl->forks = ft_calloc(tbl->philos_amt, sizeof(pthread_mutex_t));
 	if (tbl->forks == NULL)
 		return (EXIT_FAILURE);
-	tbl->threads = ph_calloc(tbl->philos_amt, sizeof(pthread_t));
+	tbl->threads = ft_calloc(tbl->philos_amt, sizeof(pthread_t));
 	if (tbl->threads == NULL)
 	{
 		free(tbl->forks);
 		return (EXIT_FAILURE);
 	}
-	tbl->philos = ph_calloc(tbl->philos_amt, sizeof(t_philo));
+	tbl->philos = ft_calloc(tbl->philos_amt, sizeof(t_philo));
 	if (tbl->philos == NULL)
 	{
 		free(tbl->forks);
